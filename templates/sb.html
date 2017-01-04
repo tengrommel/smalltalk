@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A AWESOME WEB !</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}">
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/semantic.js'%}"></script>
+  </head>
+  <body>
+    <div class="ui thin visible left sidebar inverted vertical menu">
+      <div class="header item">
+        <img src="{%  static 'images/apple.jpg' %}">
+      </div>
+      <div class="item">
+        teng
+        <i class="anchor icon"></i>
+      </div>
+      <div class="item">
+          18654310732
+        <i class="text telephone icon"></i>
+      </div>
+      <div class="item">
+        as you want success as you want breath
+        <i class="code icon"></i>
+      </div>
+
+    </div>
+    <div class="pusher">
+
+
+      <div class="ui menu">
+        <div class="header item" id="menu">
+          拉开
+          <i class="content icon"></i>
+        </div>
+        <div class="item">
+          <a href="http://192.168.142.165:8000/index/">首页</a>
+        </div>
+        <div class="item">
+            <a href="/add">发帖</a>
+        </div>
+        <div class="item">
+            <a href="http://map.baidu.com/">百度</a>
+        </div>
+        <div class="item">
+            <a href="https://github.com/tengrommel/">我的github</a>
+        </div>
+      </div>
+      <div class="ui container">
+        <div class="ui divided items">
+        {% for item in ArtiInfo %}
+          <div class="item">
+            <div class="content">
+              <div class="header">
+                {{ item.title }}
+              </div>
+              <div class="description">
+                <p>
+                  {{ item.des }}
+                </p>
+              </div>
+              <div class="extra">
+{#                <div class="ui label">#}
+{#                  tag1#}
+{#                </div>#}
+{#                <div class="ui label">#}
+{#                  tag2#}
+{#                </div>#}
+                   {% for tag in item.tags %}
+                            <span class="ui label">{{ tag }}</span>
+                   {% endfor %}
+
+              </div>
+
+            </div>
+
+          </div>
+        {% endfor %}
+
+        </div>
+        <div class="main-content-pagitor">
+
+        {% if ArtiInfo.has_previous %}
+            <a href="?page={{ ArtiInfo.previous_page_number }}">< 前一页</a>
+        {% endif %}
+            <span>{{ ArtiInfo.number }} of {{ ArtiInfo.paginator.num_pages }}</span>
+        {% if ArtiInfo.has_next %}
+            <a href="?page={{ ArtiInfo.next_page_number }}">后一页 ></a>
+        {% endif %}
+
+        </div>
+      </div>
+
+    </div>
+    <script>
+      $('#menu').click(function () {
+        $('.ui.sidebar').sidebar('toggle');
+      });
+    </script>
+
+  </body>
+</html>
